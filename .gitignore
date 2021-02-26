@@ -1,0 +1,6 @@
+**/__pycache__
+**/venv
+**/.idea
+__pycache__/
+/.history
+SQL.sql
