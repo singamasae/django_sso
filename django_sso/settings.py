@@ -148,7 +148,9 @@ AUTHENTICATION_BACKENDS = [
 
 OAUTH2_PROVIDER = {
     'OAUTH2_BACKEND_CLASS': 'oauth2_provider.oauth2_backends.JSONOAuthLibCore',
-    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'},
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 24*60*60,  # 1 day
+    'REFRESH_TOKEN_EXPIRE_SECONDS': 60*60,  # 1 hour
 }
 
 REST_FRAMEWORK = {
