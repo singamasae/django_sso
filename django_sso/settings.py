@@ -142,7 +142,8 @@ PASSWORD_HASHERS = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'oauth2_provider.backends.OAuth2Backend',
+    # disable because using django rest auth class
+    # 'oauth2_provider.backends.OAuth2Backend',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -160,4 +161,57 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ]
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} [{module} ({funcName}:{lineno})] {message}',
+            'style': '{',
+        }
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            # 'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+
+        # 'file': {
+        #    'level': 'DEBUG',
+        #    'class': 'logging.handlers.TimedRotatingFileHandler',
+        #    'when': 'midnight',
+        #    'filename': '/var/log/django_sso.log',
+        #    'formatter': 'verbose'
+        # }
+
+    },
+    'loggers': {
+        'django': {
+            'level': 'DEBUG',
+            # 'handlers': ['console', 'file'],
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'django.db.backends': {
+            'level': 'DEBUG',
+            # 'handlers': ['console', 'file'],
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        '': {
+            'level': 'DEBUG',
+            # 'handlers': ['console', 'file'],
+            'handlers': ['console'],
+            'propagate': False,
+        }
+    }
 }
